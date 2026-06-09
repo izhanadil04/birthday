@@ -1,0 +1,6 @@
+{
+  "name": "Birthday Wish Website",
+  "description": "A beautiful, interactive birthday wish website featuring custom messages, a blowable cake candle, falling confetti, balloon animations, sweet background music, and an image-downloadable wish card.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

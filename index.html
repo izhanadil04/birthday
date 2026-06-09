@@ -1,0 +1,1537 @@
+<!doctype html>
+<!-- 
+============================================================
+           BIRTHDAY WISH WEBSITE CUSTOMIZATION GUIDE
+============================================================
+To customize this website, scroll to the script block 
+at the bottom of this file (search for "CONFIGURATION").
+You can change:
+  1. CELEBRANT_NAME: The name of the birthday boy/girl.
+  2. CELEBRANT_AGE: The age (optional, set to null to hide).
+  3. BIRTHDAY_MESSAGE: The emotional letter or note.
+  4. MEMORY_IMAGES: Change the image paths to your own photo URLs!
+============================================================
+-->
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Qirat ✨🍰</title>
+
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;700&family=Pacifico&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Canvas Confetti and html2canvas via CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            partyDark: '#080211',
+            partyDeep: '#130722',
+            partyViolet: '#aa00ff',
+            partyPink: '#ff2d7a',
+            partyCyan: '#00e5ff',
+            partyGold: '#ffea00',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            handwritten: ['Pacifico', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth animated background glow */
+    body {
+      background-color: #080211;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #080211;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3a154d;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff2d7a;
+    }
+
+    /* Glassmorphism utility */
+    .glass {
+      background: rgba(19, 7, 34, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 45, 122, 0.15);
+    }
+
+    .glass-premium {
+      background: linear-gradient(135deg, rgba(28, 11, 48, 0.75) 0%, rgba(12, 4, 22, 0.85) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 234, 0, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Glowing text effects */
+    .neon-glow {
+      text-shadow: 0 0 10px rgba(255, 45, 122, 0.5), 0 0 25px rgba(255, 45, 122, 0.3);
+    }
+
+    .neon-glow-violet {
+      text-shadow: 0 0 10px rgba(170, 0, 255, 0.5), 0 0 25px rgba(170, 0, 255, 0.3);
+    }
+
+    .neon-glow-gold {
+      text-shadow: 0 0 10px rgba(255, 234, 0, 0.5), 0 0 25px rgba(255, 234, 0, 0.3);
+    }
+
+    /* Balloon float animation */
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) rotate(0deg) scale(0.9);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.85;
+      }
+
+      90% {
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: translateY(-20vh) rotate(360deg) scale(1.05);
+        opacity: 0;
+      }
+    }
+
+    /* Sparkle star twinkling */
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    .star-twinkle {
+      animation: twinkle 4s infinite ease-in-out;
+    }
+
+    /* 3D Cake styling */
+    .cake-container {
+      perspective: 1000px;
+    }
+
+    .cake-tier {
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Realistic flickering candle flame */
+    .flame {
+      width: 14px;
+      height: 32px;
+      background: linear-gradient(to bottom, #fff 0%, #ffea00 30%, #ff5500 70%, #aa0044 100%);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 20px #ffea00, 0 -10px 15px #ff5500, 0 10px 10px rgba(255, 85, 0, 0.4);
+      animation: flicker 1.2s infinite ease-in-out alternate;
+      transform-origin: center bottom;
+    }
+
+    @keyframes flicker {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(-1deg);
+      }
+
+      20% {
+        transform: scale(1.05, 0.95) rotate(1deg);
+      }
+
+      40% {
+        transform: scale(0.95, 1.05) rotate(-2deg) skewX(-2deg);
+      }
+
+      60% {
+        transform: scale(1.02, 0.98) rotate(2deg) skewX(2deg);
+      }
+
+      80% {
+        transform: scale(0.98, 1.02) rotate(-1deg);
+      }
+    }
+
+    /* Polaroid style picture rotate */
+    .polaroid {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+    }
+
+    .polaroid:hover {
+      transform: scale(1.06) rotate(2deg) translateY(-8px);
+      box-shadow: 0 25px 50px rgba(255, 45, 122, 0.25);
+      z-index: 10;
+    }
+
+    /* Drifting Sparkles Click Interaction */
+    .sparkle-particle {
+      position: absolute;
+      pointer-events: none;
+      background: radial-gradient(circle, #fff, rgba(255, 234, 0, 1) 40%, rgba(255, 45, 122, 0) 80%);
+      border-radius: 50%;
+      animation: sparkleFade 1.2s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* Audio Equalizer visualizer effect */
+    .eq-bar {
+      width: 3px;
+      background-color: #ff2d7a;
+      animation: eqPulse 1s infinite alternate ease-in-out;
+      transform-origin: bottom;
+    }
+
+    .eq-bar:nth-child(2) {
+      animation-delay: 0.2s;
+      height: 12px;
+    }
+
+    .eq-bar:nth-child(3) {
+      animation-delay: 0.4s;
+      height: 18px;
+    }
+
+    .eq-bar:nth-child(4) {
+      animation-delay: 0.1s;
+      height: 8px;
+    }
+
+    .eq-bar:nth-child(5) {
+      animation-delay: 0.3s;
+      height: 15px;
+    }
+
+    @keyframes eqPulse {
+      0% {
+        transform: scaleY(0.2);
+      }
+
+      100% {
+        transform: scaleY(1);
+      }
+    }
+
+    /* Smooth slide in for live customizer */
+    .customizer-drawer {
+      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+  </style>
+</head>
+
+<body class="text-white relative min-h-screen">
+
+  <!-- Ambient twinkle stars container -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="star-field"></div>
+
+  <!-- Active Canvas particles: floating lantern particles -->
+  <canvas id="parallax-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- Floating Interactive Balloons Container -->
+  <div id="balloons-container" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+  <!-- MAIN APP WRAPPER -->
+  <div class="relative z-10 flex flex-col min-h-screen justify-between">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="w-full glass py-4 px-6 md:px-12 sticky top-0 z-40 transition-all">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="triggerMegaCelebration()">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-partyPink to-partyViolet flex items-center justify-center text-xl shadow-lg ring-2 ring-partyPink/30 animate-pulse">
+            🎈
+          </div>
+          <span
+            class="font-display font-bold text-lg tracking-wider bg-gradient-to-r from-partyPink via-partyViolet to-partyCyan bg-clip-text text-transparent">
+            HAPPY BIRTHDAY
+          </span>
+        </div>
+
+        <!-- Music Mini Controller -->
+        <div class="flex items-center space-x-4">
+          <div id="playing-status"
+            class="hidden md:flex items-end space-x-0.5 h-5 px-2 bg-purple-950/40 rounded border border-purple-500/20">
+            <div class="eq-bar h-10 bg-partyPink"></div>
+            <div class="eq-bar h-10 bg-partyViolet"></div>
+            <div class="eq-bar h-10 bg-partyCyan"></div>
+            <div class="eq-bar h-10 bg-partyGold"></div>
+            <div class="eq-bar h-10 bg-partyPink"></div>
+          </div>
+
+          <!-- Music Player Box -->
+          <button id="toggle-music-btn" onclick="toggleMusic()"
+            class="flex items-center justify-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-800 to-pink-700 hover:from-purple-700 hover:to-pink-600 border border-white/10 shadow-lg text-sm font-medium transition active:scale-95">
+            <i class="fa-solid fa-music text-partyGold animate-bounce"></i>
+            <span id="music-btn-text">Start Music</span>
+          </button>
+
+          <!-- Customizer Trigger Button -->
+          <button onclick="toggleCustomizer()"
+            class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center transition active:scale-90"
+            title="Live Customizer">
+            <i class="fa-solid fa-cog text-partyCyan text-lg animate-spin" style="animation-duration: 8s"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-20 flex-grow w-full relative">
+
+      <!-- HERO GREETING SECTION -->
+      <section id="hero-section" class="text-center space-y-6 pt-10 relative">
+        <!-- Small festive badge -->
+        <div
+          class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-partyPink/15 border border-partyPink/30 text-xs md:text-sm text-partyPink font-semibold animate-pulse uppercase tracking-widest mx-auto">
+          <i class="fa-solid fa-gift"></i>
+          <span>A Special Celebration Just for You</span>
+        </div>
+
+        <!-- Dynamic Happy Birthday Text -->
+        <div class="relative inline-block">
+          <h1 class="text-5xl md:text-8xl font-display font-extrabold tracking-tight relative z-10 leading-tight">
+            <span class="block text-gradient">HAPPY BIRTHDAY</span>
+            <span class="block neon-glow text-partyPink font-serif italic mt-2 animate-bounce">Qirat</span>
+          </h1>
+          <div class="absolute -top-6 -left-6 text-4xl transform -rotate-12 animate-pulse text-partyGold">✨</div>
+          <div class="absolute -bottom-6 -right-6 text-4xl transform rotate-12 animate-bounce text-partyCyan"
+            style="animation-delay: 0.5s">⭐</div>
+        </div>
+
+        <!-- Dynamic Age Display Banner -->
+        <div id="age-badge-container" class="max-w-xs mx-auto transform hover:scale-105 transition">
+          <p id="display-age-text" class="text-lg md:text-xl text-partyCyan/90 font-medium tracking-wide">
+            Wishing you a sensational <span id="display-age"
+              class="px-2.5 py-0.5 rounded-full bg-partyCyan/15 border border-partyCyan/30 text-partyCyan font-bold">14th</span>
+            chapter!
+          </p>
+        </div>
+
+        <!-- Cozy Emotional Subheading -->
+        <p id="display-subtitle"
+          class="max-w-2xl mx-auto text-gray-400 font-light text-base md:text-lg leading-relaxed px-4">
+          May this day be filled with warm smiles, sweet laughter, beautiful moments, and the realization of all your
+          deepest heart's desires. Scroll down to claim your magical birthday surprise!
+        </p>
+
+        <!-- Interactive Balloon Spawn Button -->
+        <div class="flex flex-wrap justify-center gap-4 pt-6">
+          <button onclick="triggerConfetti()"
+            class="px-6 py-3 rounded-full bg-partyPink hover:bg-pink-500 text-white font-medium shadow-lg hover:shadow-partyPink/40 transition active:scale-95 space-x-2 flex items-center">
+            <i class="fa-solid fa-wand-magic-sparkles text-partyGold"></i>
+            <span>Confetti Burst</span>
+          </button>
+          <button onclick="spawnBalloonsGroup(12)"
+            class="px-6 py-3 rounded-full bg-partyCyan hover:bg-cyan-500 text-partyDark font-bold shadow-lg hover:shadow-partyCyan/40 transition active:scale-95 space-x-2 flex items-center">
+            <i class="fa-solid fa-paper-plane text-purple-900"></i>
+            <span>Launch Balloons</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- THE INTERACTIVE BIRTHDAY CAKE SECTION -->
+      <section id="cake-section"
+        class="glass-premium rounded-3xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+
+        <div class="absolute top-0 right-0 w-64 h-64 bg-partyPink/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-partyCyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Text block -->
+        <div class="flex-1 space-y-6 text-center md:text-left">
+          <div
+            class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-partyGold/10 border border-partyGold/30 text-xs text-partyGold font-medium">
+            <i class="fa-solid fa-fire animate-pulse text-partyGold"></i>
+            <span>Interactive Virtual Candle</span>
+          </div>
+          <h3 class="text-3xl md:text-4xl font-display font-bold">
+            Time to <span class="bg-gradient-to-r from-partyGold to-partyPink bg-clip-text text-transparent">Make a
+              Wish!</span>
+          </h3>
+          <span> Happy Birthday, My bacha ❤️</span>
+          <p class="text-gray-300 leading-relaxed max-w-md">
+            On your special day, I pray from the bottom of my heart that every year you become more beautiful, more
+            lovely, and only mine. You are my whole world, my morning, my night. Life feels incomplete without you.
+            When you smile, my entire day lights up. When you close your eyes and come close to me, I forget the whole
+            world. Thank you for being the most beautiful part of my life.
+            In this new year of your life, I promise to love you so much that every breath of yours carries only my
+            name. May you always be happy and always stay with me.
+            I love you today, tomorrow, and forever. Happy Birthday, My Bacha! 🎂💕
+          </p>
+
+          <!-- Blow control panel -->
+          <div class="pt-2 flex flex-col items-center md:items-start gap-4">
+            <button id="blow-btn" onclick="blowCandle()"
+              class="px-6 py-3 rounded-full bg-gradient-to-r from-partyGold to-orange-500 text-purple-950 font-bold hover:shadow-lg hover:shadow-partyGold/35 transition active:scale-95 flex items-center space-x-2">
+              <i class="fa-solid fa-wind animate-pulse"></i>
+              <span id="blow-btn-text">Blow Out Candle!</span>
+            </button>
+            <p class="text-xs text-gray-400 italic">
+              Tip: You can also tap directly on the glowing candle flame!
+            </p>
+          </div>
+        </div>
+
+        <!-- SVG/CSS Cake Side -->
+        <div class="flex-shrink-0 w-full md:w-auto flex items-center justify-center py-6 cake-container">
+          <div class="relative flex flex-col items-center">
+
+            <!-- Candle and Flame -->
+            <div id="candle-fixture"
+              class="absolute -top-24 z-30 flex flex-col items-center transition-all duration-700">
+              <!-- Glowing Flicker Flame -->
+              <div id="cake-flame" onclick="blowCandle()"
+                class="flame cursor-pointer transform hover:scale-110 active:scale-90 transition"></div>
+              <!-- Wick -->
+              <div class="w-1 h-3 bg-gray-500"></div>
+              <!-- Colorful Birthday Candle -->
+              <div
+                class="w-4 h-16 bg-gradient-to-b from-partyCyan via-blue-500 to-partyViolet rounded-t border-t border-white/20 flex flex-col justify-between items-center py-1">
+                <!-- Cute spirals on candle -->
+                <div class="w-full h-0.5 bg-yellow-300/30 transform rotate-12"></div>
+                <div class="w-full h-0.5 bg-yellow-300/30 transform rotate-12"></div>
+                <div class="w-full h-0.5 bg-yellow-300/30 transform rotate-12"></div>
+              </div>
+            </div>
+
+            <!-- Smoke Puff (Hidden by default, shown briefly on blowout) -->
+            <div id="candle-smoke"
+              class="absolute -top-28 z-40 opacity-0 pointer-events-none transition-all duration-1000 flex flex-col items-center">
+              <div class="w-12 h-12 rounded-full bg-white/20 blur-md scale-50"></div>
+              <div class="w-8 h-8 rounded-full bg-white/10 blur-md mt-1 scale-50"></div>
+            </div>
+
+            <!-- Birthday Cake CSS Layers -->
+            <div class="w-64 flex flex-col items-center">
+              <!-- Cake Tier Top (Smaller) -->
+              <div
+                class="w-44 h-16 bg-gradient-to-r from-pink-400 to-partyPink rounded-full relative z-20 shadow-md flex items-center justify-center border-t border-pink-300">
+                <!-- Decorative Strawberries/Cherries -->
+                <div class="absolute -top-1 w-3 h-3 bg-red-600 rounded-full shadow-inner left-4"></div>
+                <div class="absolute -top-1 w-3 h-3 bg-red-600 rounded-full shadow-inner left-12"></div>
+                <div class="absolute -top-1 w-3 h-3 bg-red-600 rounded-full shadow-inner right-12"></div>
+                <div class="absolute -top-1 w-3 h-3 bg-red-600 rounded-full shadow-inner right-4"></div>
+
+                <!-- Icing Drips -->
+                <div class="absolute bottom-[-10px] left-0 right-0 flex justify-around z-20">
+                  <div class="w-4 h-4 bg-partyPink rounded-b-full"></div>
+                  <div class="w-4 h-6 bg-partyPink rounded-b-full"></div>
+                  <div class="w-4 h-3 bg-partyPink rounded-b-full"></div>
+                  <div class="w-4 h-5 bg-partyPink rounded-b-full"></div>
+                  <div class="w-4 h-4 bg-partyPink rounded-b-full"></div>
+                  <div class="w-4 h-7 bg-partyPink rounded-b-full"></div>
+                  <div class="w-4 h-3 bg-partyPink rounded-b-full"></div>
+                </div>
+                <span class="text-xs font-bold text-white/80 uppercase tracking-widest font-display text-shadow">Make
+                  wish</span>
+              </div>
+              <div class="w-44 h-8 bg-pink-600/90 rounded-full mt-[-8px] relative z-10 shadow-lg"></div>
+
+              <!-- Cake Tier Bottom (Larger) -->
+              <div
+                class="w-56 h-20 bg-gradient-to-r from-[#8a00e6] to-[#aa00ff] rounded-full relative z-10 shadow-md mt-[-16px] border-t border-purple-400">
+                <!-- Decorative cream piping -->
+                <div class="absolute top-2 left-4 right-4 flex justify-between px-2">
+                  <div class="w-2 h-2 bg-yellow-200 rounded-full"></div>
+                  <div class="w-2 h-2 bg-yellow-200 rounded-full"></div>
+                  <div class="w-2 h-2 bg-yellow-200 rounded-full"></div>
+                  <div class="w-2 h-2 bg-yellow-200 rounded-full"></div>
+                  <div class="w-2 h-2 bg-yellow-200 rounded-full"></div>
+                </div>
+
+                <!-- Icing Drips -->
+                <div class="absolute bottom-[-12px] left-0 right-0 flex justify-around z-10">
+                  <div class="w-5 h-4 bg-[#aa00ff] rounded-b-full"></div>
+                  <div class="w-5 h-7 bg-[#aa00ff] rounded-b-full"></div>
+                  <div class="w-5 h-3 bg-[#aa00ff] rounded-b-full"></div>
+                  <div class="w-5 h-5 bg-[#aa00ff] rounded-b-full"></div>
+                  <div class="w-5 h-8 bg-[#aa00ff] rounded-b-full"></div>
+                  <div class="w-5 h-4 bg-[#aa00ff] rounded-b-full"></div>
+                </div>
+              </div>
+              <div class="w-56 h-10 bg-purple-900/90 rounded-full mt-[-10px] shadow-lg"></div>
+
+              <!-- Cake Stand / Plate -->
+              <div
+                class="w-64 h-6 bg-gradient-to-r from-gray-300 via-white to-gray-400 rounded-full shadow-2xl mt-[-8px] relative z-0 border-b-2 border-gray-400/50">
+              </div>
+              <div class="w-32 h-10 bg-gradient-to-t from-gray-500 to-gray-300 rounded-b-lg shadow-inner"></div>
+            </div>
+
+            <!-- Sparkles indicator surrounding cake -->
+            <div id="wish-badge"
+              class="absolute -bottom-6 px-4 py-1.5 rounded-full bg-partyPink hover:bg-partyViolet shadow-lg border border-white/20 select-none scale-0 opacity-0 transition-all duration-700 font-bold text-sm tracking-wider">
+              🌟 WISH GRANTED! ✨
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EMOTIONAL GREETING ENVELOPE SECTION -->
+      <section id="letter-section" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+        <!-- Left: Emotional editable letter -->
+
+
+        <!-- Right: Premium downloadable polaroid wish card -->
+        <div class="lg:col-span-6 flex flex-col justify-center items-center space-y-6">
+
+          <!-- Downloadable card viewport wrapper with custom backdrop style -->
+          <div class="w-full flex items-center justify-center p-2">
+            <!-- Actual card node targeted by html2canvas -->
+            <div id="wish-card-downloadable"
+              class="relative w-full max-w-sm bg-gradient-to-b from-[#110121] to-[#250b44] rounded-2xl border-4 border-partyPink p-6 shadow-2xl flex flex-col items-center text-center overflow-hidden">
+              <!-- Ribbon spark decorative corners -->
+
+
+              <!-- Card header decoration -->
+              <div
+                class="w-full flex justify-center items-center text-[11px] uppercase tracking-widest text-[#ff2d7a] font-bold border-b border-[#ffd200]/20 pb-3 mb-4">
+                <span>★ Wish Card ★</span>
+                <span id="card-date-badge">June 11, 2026</span>
+              </div>
+
+              <!-- Floating main text -->
+              <h4 class="font-display font-extrabold text-[#ffd200] text-3xl tracking-wide select-none">
+                HAPPY BIRTHDAY
+              </h4>
+
+              <p id="card-display-name"
+                class="font-serif italic font-bold text-white text-3xl mt-1 text-shadow neon-glow-violet tracking-wide">
+                QIRAT
+              </p>
+
+              <!-- Small custom age ribbon -->
+              <div id="card-age-ribbon"
+                class="my-2 bg-[#ffd200] text-[#130722] text-[11px] font-extrabold uppercase py-1 px-4 rounded-full shadow-lg inline-block transform -rotate-1 select-none">
+                A Wonderful 14th Birthday
+              </div>
+
+              <!-- Main Polaroid Frame graphic on the card -->
+              <div
+                class="w-full bg-white p-2.5 pb-3.5 shadow-lg rounded-xs my-4 transform -rotate-1 transition border-b border-gray-200/50">
+                <div class="aspect-[4/3] bg-purple-950 flex overflow-hidden rounded-xs relative">
+                  <img id="card-polaroid-image" src="./src/assets/images/birthday_cake_1781040912610.png"
+                    alt="Card snap" class="w-full h-full object-cover select-none" referrerPolicy="no-referrer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                </div>
+                <span id="card-polaroid-caption"
+                  class="block font-handwritten text-lg text-[#130722] text-center mt-2.5 antialiased font-semibold">
+                  Shine bright always ✨
+                </span>
+              </div>
+
+              <!-- Emotional Custom Letter text (synced in real-time) -->
+              <div class="w-full">
+                <p id="card-emotional-message"
+                  class="font-serif italic text-gray-300 text-sm leading-relaxed px-1 text-center select-all whitespace-pre-wrap">
+                  "Wishing you a year ahead full of love, laughter, and stars!"
+                </p>
+              </div>
+
+              <!-- Signature footer on card -->
+              <div
+                class="w-full mt-6 border-t border-[#ffd200]/10 pt-3 flex items-center justify-between text-[10px] text-gray-500 font-mono">
+                <span>Created with Love • Happy Birthday Bacha</span>
+                <span>❤️🎈🍰</span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </section>
+
+
+    </main>
+
+    <!-- SEAMLESS FOOTER -->
+    <footer
+      class="w-full border-t border-white/5 bg-black/40 py-8 px-6 text-center select-none text-xs text-gray-500 relative z-20">
+      <div class="max-w-7xl mx-auto space-y-2">
+        <p>Made with love, fairy lights, and stardust ✨</p>
+        <p>© 2026 Happy Birthday Bacha! ❤️🎈🍰</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- FLOATING RETRO AUDIO MUSIC CONTROL PANEL (SLICK BOTTOM CORNER ACCIDENTS) -->
+  <div id="retro-audio-dashboard"
+    class="fixed bottom-6 right-6 z-40 max-w-xs w-72 glass rounded-2xl p-4 shadow-2xl border-partyCyan/20 transform translate-y-24 opacity-0 scale-95 transition-all duration-700">
+    <div class="flex items-center space-x-3">
+      <!-- Turning Vinyl Disc Graphic -->
+      <div class="relative flex-shrink-0">
+        <div id="audio-vinyl"
+          class="w-12 h-12 rounded-full bg-black border-2 border-dashed border-partyCyan/40 flex items-center justify-center relative animate-spin leading-none"
+          style="animation-duration: 4s; animation-play-state: paused;">
+          <div class="w-4 h-4 rounded-full bg-partyViolet/80 flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+          </div>
+        </div>
+        <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-600 rounded-full border border-white animate-ping"></div>
+      </div>
+
+      <div class="flex-grow min-w-0">
+        <h5 class="text-xs font-bold text-gray-200 truncate font-display">Happy Birthday Bacha❤️</h5>
+        <p id="audio-status-label" class="text-[10px] text-partyCyan font-mono">Music is Paused</p>
+
+        <div class="flex items-center space-x-2 mt-2">
+          <button onclick="toggleMusic()"
+            class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs text-white transition">
+            <i id="panel-play-icon" class="fa-solid fa-play"></i>
+          </button>
+          <!-- Volume slider -->
+          <input type="range" id="volume-slider" oninput="changeVolume(this.value)" min="0" max="100" value="70"
+            class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-partyCyan">
+        </div>
+      </div>
+
+      <button onclick="closeAudioDashboard()" class="text-gray-400 hover:text-white self-start text-xs pr-1">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- LIVE CUSTOMIZATION SIDEBAR DRAWER (GLASSMORPHISM) -->
+  <div id="settings-drawer"
+    class="customizer-drawer fixed top-0 right-0 h-full w-full max-w-sm glass z-50 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full border-l border-partyPink/20">
+
+    <div class="space-y-6 flex-grow overflow-y-auto pr-2">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <h4 class="text-xl font-display font-extrabold text-partyCyan flex items-center space-x-2">
+          <i class="fa-solid fa-sliders text-partyPink animate-pulse"></i>
+          <span>Live Customizer</span>
+        </h4>
+        <button onclick="toggleCustomizer()"
+          class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Inputs Group -->
+      <div class="space-y-4 pt-2 text-sm">
+
+        <!-- Custom Theme preset dropdown -->
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Theme Atmosphere</label>
+          <select id="select-theme" onchange="changeThemeAtmosphere(this.value)"
+            class="w-full bg-partyDeep text-white border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:border-partyPink transition cursor-pointer">
+            <option value="violet">Magical Violet (Default)</option>
+            <option value="sakura">Sweet Sakura (Pink & Blush)</option>
+            <option value="gold">Golden Amber (Warm & Elegant)</option>
+            <option value="cyber">Cosmic Cyber (Teal & Purple)</option>
+          </select>
+        </div>
+
+        <!-- Photo upload placeholder options -->
+
+
+      </div>
+    </div>
+
+    <!-- Settings bottom actions -->
+    <div class="pt-4 border-t border-white/10 space-y-3">
+
+      <button onclick="toggleCustomizer()"
+        class="w-full py-3 rounded-xl bg-partyPink hover:bg-pink-500 font-bold text-sm transition">
+        Apply & Close Configuration
+      </button>
+    </div>
+
+  </div>
+
+  <!-- SOUND & MUSIC ENGINE CODES (Standard clean vanilla scripts) -->
+  <script>
+    // ==========================================
+    //               CONFIGURATION
+    // ==========================================
+    // Default configurations for easy adjustments
+    let CELEBRANT_NAME = "Charlotte";
+    let CELEBRANT_AGE = 22;
+    let CELEBRANT_SUBNOTE = "May this day be filled with warm smiles, sweet laughter, beautiful moments, and the realization of all your deepest heart's desires. Scroll down to claim your magical birthday surprise!";
+
+    // Default emotional preset letters
+    const EMOTIONAL_PRESETS = [
+      "Wishing you a magnificent year ahead! May your brave, beautiful heart keep dancing through life with the exact same grace, kindness, and magical warmth. You illuminate the lives of everyone who is lucky to walk with you.",
+      "Another wonderful sunrise meets you today. This year, may your sky be clear, your laughter be frequent, your dream fly high, and your heart be anchored in pure happiness and sparkling love. Happy Birthday! ★",
+      "Releasing our biggest dreams into the skies tonight for you. May your wishes come back to you beautifully multi-folded! Happy Birthday to an absolutely incredible, breathtaking soul."
+    ];
+
+    // Default captions for the scrapbook items
+    const SCRAPBOOK_CAPTIONS = [
+      "A sweet slice of magic ✨",
+      "Cozy lights & warm wishes ❤️",
+      "Releasing dreams together 🌌"
+    ];
+
+    // ==========================================
+    //         WEB AUDIO SYNTH ENGINE
+    // ==========================================
+    // Built-in Web Audio API Music box synthesizer to play "Happy Birthday to you" looping chimes.
+    // 100% resilient - never blocks, never fails, doesn't require loaded MP3 assets!
+    let audioCtx = null;
+    let synthGainNode = null;
+    let isMusicPlaying = false;
+    let activeSchedulingTimers = [];
+    let melodySequenceTimer = null;
+    let currentMelodyOscillators = [];
+
+    // Frequencies mapping for pure toy chime acoustic sound
+    const FREQUENCIES = {
+      'C3': 130.81, 'D3': 146.83, 'E3': 164.81, 'F3': 174.61, 'G3': 196.00, 'A3': 220.00, 'Bb3': 233.08, 'B3': 246.94,
+      'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00, 'Bb4': 466.16, 'B4': 493.88,
+      'C5': 523.25, 'D5': 587.33, 'E5': 659.25, 'F5': 698.46, 'G5': 783.99, 'A5': 880.00, 'B5': 987.77
+    };
+
+    // Happy Birthday Melody in 3/4 Time
+    const HBD_MELODY = [
+      { note: 'C4', dur: 0.75, beat: 0.0 }, { note: 'C4', dur: 0.25, beat: 0.75 }, { note: 'D4', dur: 1.0, beat: 1.0 }, { note: 'C4', dur: 1.0, beat: 2.0 },
+      { note: 'F4', dur: 2.0, beat: 3.0 }, { note: 'E4', dur: 1.0, beat: 5.0 },
+
+      { note: 'C4', dur: 0.75, beat: 6.0 }, { note: 'C4', dur: 0.25, beat: 6.75 }, { note: 'D4', dur: 1.0, beat: 7.0 }, { note: 'C4', dur: 1.0, beat: 8.0 },
+      { note: 'G4', dur: 2.0, beat: 9.0 }, { note: 'F4', dur: 1.0, beat: 11.0 },
+
+      { note: 'C4', dur: 0.75, beat: 12.0 }, { note: 'C4', dur: 0.25, beat: 12.75 }, { note: 'C5', dur: 1.0, beat: 13.0 }, { note: 'A4', dur: 1.0, beat: 14.0 },
+      { note: 'F4', dur: 1.0, beat: 15.0 }, { note: 'E4', dur: 1.0, beat: 16.0 }, { note: 'D4', dur: 1.0, beat: 17.0 },
+
+      { note: 'Bb4', dur: 0.75, beat: 18.0 }, { note: 'Bb4', dur: 0.25, beat: 18.75 }, { note: 'A4', dur: 1.0, beat: 19.0 }, { note: 'F4', dur: 1.0, beat: 20.0 },
+      { note: 'G4', dur: 2.0, beat: 21.0 }, { note: 'F4', dur: 2.0, beat: 23.0 }
+    ];
+
+    // Warm support harmony pads
+    const HBD_HARMONY = [
+      { note: 'F3', beat: 0.0, dur: 3.0 },
+      { note: 'F3', beat: 3.0, dur: 3.0 },
+      { note: 'C3', beat: 6.0, dur: 3.0 },
+      { note: 'C3', beat: 9.0, dur: 3.0 },
+      { note: 'F3', beat: 12.0, dur: 3.0 },
+      { note: 'Bb3', beat: 15.0, dur: 3.0 },
+      { note: 'F3', beat: 18.0, dur: 3.0 },
+      { note: 'C3', beat: 21.0, dur: 2.0 },
+      { note: 'F3', beat: 23.0, dur: 2.0 }
+    ];
+
+    const TEMPO_BPM = 105;
+    const SECONDS_PER_BEAT = 60 / TEMPO_BPM;
+    const SONG_LENGTH_BEATS = 26;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        synthGainNode = audioCtx.createGain();
+        synthGainNode.gain.setValueAtTime(0.35, audioCtx.currentTime); // default comfortable volume
+        synthGainNode.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playChime(freq, startTime, duration, isMelody = true) {
+      if (!audioCtx) return;
+
+      // Osc 1: warm core - triangle wave
+      const osc = audioCtx.createOscillator();
+      const oscGain = audioCtx.createGain();
+
+      osc.type = isMelody ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      // Add subtle pitch vibrato for warmth
+      if (isMelody) {
+        const lfo = audioCtx.createOscillator();
+        const lfoGain = audioCtx.createGain();
+        lfo.frequency.value = 6; // 6Hz vibrato
+        lfoGain.gain.value = 4; // micro vibrato depth
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+        lfo.start(startTime);
+        lfo.stop(startTime + duration);
+      }
+
+      // Beautiful glass envelope (bell-like decay)
+      const attack = 0.02;
+      const decay = duration - attack;
+
+      oscGain.gain.setValueAtTime(0, startTime);
+      oscGain.gain.linearRampToValueAtTime(isMelody ? 0.35 : 0.15, startTime + attack);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, startTime + attack + decay);
+
+      // Lowpass filter for dreamy vintage box quality
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(isMelody ? 1600 : 800, startTime);
+
+      osc.connect(oscGain);
+      oscGain.connect(filter);
+      filter.connect(synthGainNode);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration + 0.1);
+
+      currentMelodyOscillators.push(osc);
+    }
+
+    function scheduleSongLoop() {
+      if (!isMusicPlaying) return;
+      initAudio();
+
+      const now = audioCtx.currentTime;
+      currentMelodyOscillators = [];
+
+      // Schedule Melody
+      HBD_MELODY.forEach((item) => {
+        const start = now + (item.beat * SECONDS_PER_BEAT);
+        const dur = item.dur * SECONDS_PER_BEAT;
+        const freq = FREQUENCIES[item.note];
+        playChime(freq, start, dur, true);
+      });
+
+      // Schedule Harmony
+      HBD_HARMONY.forEach((item) => {
+        const start = now + (item.beat * SECONDS_PER_BEAT);
+        const dur = item.dur * SECONDS_PER_BEAT;
+        const freq = FREQUENCIES[item.note];
+        playChime(freq, start, dur, false);
+      });
+
+      // Loop triggering
+      const loopDurationMs = SONG_LENGTH_BEATS * SECONDS_PER_BEAT * 1000;
+      const timerId = setTimeout(() => {
+        if (isMusicPlaying) {
+          scheduleSongLoop();
+        }
+      }, loopDurationMs);
+      activeSchedulingTimers.push(timerId);
+    }
+
+    function stopSynthMusic() {
+      isMusicPlaying = false;
+      activeSchedulingTimers.forEach(id => clearTimeout(id));
+      activeSchedulingTimers = [];
+      try {
+        currentMelodyOscillators.forEach(osc => osc.stop());
+      } catch (e) { }
+      currentMelodyOscillators = [];
+    }
+
+    function playPopSound() {
+      try {
+        if (!audioCtx) initAudio();
+        const start = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(150, start);
+        osc.frequency.exponentialRampToValueAtTime(700, start + 0.08); // micro bend up
+
+        gainNode.gain.setValueAtTime(0.2, start);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, start + 0.08);
+
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        osc.start(start);
+        osc.stop(start + 0.09);
+      } catch (e) { }
+    }
+
+    function playCandleBlowSound() {
+      try {
+        if (!audioCtx) initAudio();
+        const start = audioCtx.currentTime;
+
+        // Generate a custom cute magical wind slide down
+        const osc = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(600, start);
+        osc.frequency.exponentialRampToValueAtTime(100, start + 0.6);
+
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(400, start);
+        osc2.frequency.linearRampToValueAtTime(50, start + 0.6);
+
+        gainNode.gain.setValueAtTime(0.3, start);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, start + 0.6);
+
+        osc.connect(gainNode);
+        osc2.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        osc.start(start);
+        osc2.start(start);
+        osc.stop(start + 0.6);
+        osc2.stop(start + 0.6);
+      } catch (e) { }
+    }
+
+    // ==========================================
+    //         INTERACTIVE STATE ENGINE
+    // ==========================================
+
+    let isCandleLit = true;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Star field spawn
+      spawnBackgroundStars();
+
+      // Initial parameters write-in
+      resetSettingsToDefaultValues();
+      applyCurrentStateToUI();
+
+      // Canvas ambient animation bootup
+      initParallaxEmbers();
+
+      // Automatic balloon floating cycle
+      startAmbientBalloonsSpawner();
+
+      // Initial launch confetti celebration
+      setTimeout(() => {
+        triggerConfetti();
+      }, 1200);
+
+      // Track click coordinates for cute stars animation
+      document.body.addEventListener('click', (e) => {
+        // Do not trigger particles on buttons or inputs
+        if (e.target.closest('button, input, select, textarea, a')) return;
+        spawnClickSparkles(e.clientX, e.clientY);
+      });
+    });
+
+    function applyCurrentStateToUI() {
+      // Main title and headings
+      document.getElementById('display-name').textContent = CELEBRANT_NAME + "!";
+      document.getElementById('card-display-name').textContent = CELEBRANT_NAME + "!";
+
+      // Age indicator
+      const ageBox = document.getElementById('age-badge-container');
+      const cardAgeBox = document.getElementById('card-age-ribbon');
+      if (CELEBRANT_AGE && CELEBRANT_AGE > 0) {
+        ageBox.classList.remove('hidden');
+        cardAgeBox.classList.remove('hidden');
+
+        const suffix = getOrdinalSuffix(CELEBRANT_AGE);
+        document.getElementById('display-age').textContent = CELEBRANT_AGE + suffix;
+        cardAgeBox.textContent = `A Wonderful ${CELEBRANT_AGE}${suffix} Birthday`;
+      } else {
+        ageBox.classList.add('hidden');
+        cardAgeBox.classList.add('hidden');
+      }
+
+      // Subtitle slogan description
+      document.getElementById('display-subtitle').textContent = CELEBRANT_SUBNOTE;
+
+      // Custom Message write text
+      const messageTextarea = document.getElementById('custom-message-input');
+      if (messageTextarea.value === "") {
+        messageTextarea.value = EMOTIONAL_PRESETS[0];
+      }
+      liveUpdateMessage();
+    }
+
+    function getOrdinalSuffix(i) {
+      let j = i % 10, k = i % 100;
+      if (j == 1 && k != 11) return "st";
+      if (j == 2 && k != 12) return "nd";
+      if (j == 3 && k != 13) return "rd";
+      return "th";
+    }
+
+    function liveUpdateMessage() {
+      const msg = document.getElementById('custom-message-input').value;
+      document.getElementById('card-emotional-message').textContent = `"${msg}"`;
+    }
+
+    function writePresetMessage(type) {
+      const messageTextarea = document.getElementById('custom-message-input');
+      // Rotate presets
+      const currentIndex = EMOTIONAL_PRESETS.indexOf(messageTextarea.value);
+      let nextIndex = (currentIndex + 1) % EMOTIONAL_PRESETS.length;
+      if (currentIndex === -1) nextIndex = 0;
+
+      messageTextarea.value = EMOTIONAL_PRESETS[nextIndex];
+      liveUpdateMessage();
+      triggerConfetti(0.2);
+    }
+
+    function selectPresetQuote(index) {
+      const messageTextarea = document.getElementById('custom-message-input');
+      messageTextarea.value = EMOTIONAL_PRESETS[index];
+      liveUpdateMessage();
+      triggerConfetti(0.25);
+
+      // Scroll slightly down to make card instantly reviewable
+      document.getElementById('letter-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ==========================================
+    //           CANDLE BLOWING ACTION
+    // ==========================================
+
+    function blowCandle() {
+      if (!isCandleLit) return;
+      isCandleLit = false;
+
+      playCandleBlowSound();
+      triggerMegaCelebration();
+
+      // Turn off candle flame and active smoke particles
+      const flame = document.getElementById('cake-flame');
+      const smoke = document.getElementById('candle-smoke');
+      const fixture = document.getElementById('candle-fixture');
+      const badge = document.getElementById('wish-badge');
+
+      flame.classList.add('scale-0');
+      setTimeout(() => {
+        flame.style.display = 'none';
+      }, 400);
+
+      // Smoke puff
+      smoke.style.opacity = '1';
+      smoke.classList.add('-translate-y-6');
+      setTimeout(() => {
+        smoke.style.opacity = '0';
+      }, 1200);
+
+      // Show Wish Granted badge
+      badge.classList.remove('scale-0', 'opacity-0');
+      badge.classList.add('scale-100', 'opacity-100');
+
+      // Update button text
+      const blowBtn = document.getElementById('blow-btn');
+      blowBtn.innerHTML = '<i class="fa-solid fa-star-and-crescent text-partyGold"></i> <span>Wish Granted! ★</span>';
+      blowBtn.className = "px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold cursor-default flex items-center space-x-2";
+
+      if (!isMusicPlaying) {
+        toggleMusic();
+      }
+    }
+
+    // ==========================================
+    //             CELEBRATION EFFECTS
+    // ==========================================
+
+    function triggerMegaCelebration() {
+      // Trigger multi massive confetti blasts
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.8 },
+          colors: ['#ff2d7a', '#aa00ff', '#ffd200']
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.8 },
+          colors: ['#00e5ff', '#ff2d7a', '#ffd200']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+
+      // Launch a fleet of balloons
+      spawnBalloonsGroup(15);
+    }
+
+    function triggerConfetti(scalar = 1) {
+      confetti({
+        particleCount: Math.floor(80 * scalar),
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#ff2d7a', '#aa00ff', '#00e5ff', '#ffea00', '#ffffff']
+      });
+    }
+
+    // Dynamic spark stars on random click space area
+    function spawnClickSparkles(x, y) {
+      const count = 10;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'sparkle-particle';
+        document.body.appendChild(p);
+
+        const size = Math.random() * 12 + 6;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = x - size / 2 + 'px';
+        p.style.top = y - size / 2 + 'px';
+
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 100 + 40;
+        const mx = Math.cos(angle) * speed;
+        const my = Math.sin(angle) * speed;
+
+        p.style.setProperty('--x', mx + 'px');
+        p.style.setProperty('--y', my + 'px');
+
+        setTimeout(() => {
+          p.remove();
+        }, 1200);
+      }
+    }
+
+    // ==========================================
+    //           BALLOONS ENGINE
+    // ==========================================
+
+    const BALLOON_COLORS = [
+      'radial-gradient(circle at 30% 30%, #ff2d7a, #aa0044)', // Pink/dark Orchid
+      'radial-gradient(circle at 30% 30%, #00e5ff, #007799)', // Celestial cyan
+      'radial-gradient(circle at 30% 30%, #aa00ff, #5500aa)', // Classic Violet
+      'radial-gradient(circle at 30% 30%, #ffea00, #aa8800)', // Radiant Gold
+      'radial-gradient(circle at 30% 30%, #ff5500, #aa2200)', // Cheerful Orange
+    ];
+
+    function createSingleBalloon(customX = null) {
+      const container = document.getElementById('balloons-container');
+      const balloon = document.createElement('div');
+      balloon.className = "absolute z-30 cursor-pointer pointer-events-auto flex flex-col items-center select-none";
+      balloon.style.width = "48px";
+      balloon.style.height = "60px";
+
+      let targetX = customX !== null ? customX : (Math.random() * 90 + 5);
+      balloon.style.left = targetX + "%";
+
+      // Ballon body
+      const body = document.createElement('div');
+      body.className = "w-12 h-16 rounded-full relative shadow-lg";
+      body.style.background = BALLOON_COLORS[Math.floor(Math.random() * BALLOON_COLORS.length)];
+
+      // Gloss shine highlight on top left
+      const shine = document.createElement('div');
+      shine.className = "absolute top-2 left-2.5 w-3.5 h-6 bg-white/25 rounded-full rotate-[-25deg]";
+      body.appendChild(shine);
+
+      // Knot at baseline
+      const knot = document.createElement('div');
+      knot.className = "absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-3 h-2 bg-inherit border-t-2 border-black/30 rounded-full";
+      body.appendChild(knot);
+
+      // Balloon string
+      const string = document.createElement('div');
+      string.className = "w-[1px] h-[70px] bg-white/35 relative bottom-[-60px]";
+
+      balloon.appendChild(body);
+      balloon.appendChild(string);
+
+      // Floating properties
+      const duration = Math.random() * 6 + 7; // 7s to 13s flight duration
+      balloon.style.animation = `floatUp ${duration}s linear forwards`;
+
+      // Interactive pop on click
+      balloon.addEventListener('mousedown', () => {
+        popBalloon(balloon);
+      });
+
+      container.appendChild(balloon);
+
+      // Remove after fly
+      setTimeout(() => {
+        balloon.remove();
+      }, duration * 1000);
+    }
+
+    function popBalloon(balloon) {
+      playPopSound();
+      const rect = balloon.getBoundingClientRect();
+
+      // trigger micro confetti at pop coordinates
+      confetti({
+        particleCount: 15,
+        startVelocity: 20,
+        spread: 360,
+        origin: {
+          x: (rect.left + rect.width / 2) / window.innerWidth,
+          y: (rect.top + rect.height / 2) / window.innerHeight
+        }
+      });
+
+      // trigger quick zoom-fade in style
+      balloon.style.transform = 'scale(1.4)';
+      balloon.style.opacity = '0';
+      setTimeout(() => {
+        balloon.remove();
+      }, 150);
+    }
+
+    function spawnBalloonsGroup(count) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          createSingleBalloon();
+        }, i * 150);
+      }
+    }
+
+    function startAmbientBalloonsSpawner() {
+      setInterval(() => {
+        // Slowly inject cute ambient balloons
+        if (document.hidden) return;
+        createSingleBalloon();
+      }, 4500);
+    }
+
+    // ==========================================
+    //           PARALLAX EMBERS BACKGROUND
+    // ==========================================
+    let candleLanterns = [];
+    const canvas = document.getElementById('parallax-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function initParallaxEmbers() {
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      const count = 45;
+      candleLanterns = [];
+      for (let i = 0; i < count; i++) {
+        candleLanterns.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height + canvas.height, // spawn low
+          r: Math.random() * 4 + 1.5,
+          speed: Math.random() * 0.9 + 0.3,
+          drift: Math.random() * 0.6 - 0.3,
+          alpha: Math.random() * 0.7 + 0.2,
+          peakAlpha: Math.random() * 0.5 + 0.4
+        });
+      }
+
+      requestAnimationFrame(animateParallaxCanvas);
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function animateParallaxCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      candleLanterns.forEach(ember => {
+        ember.y -= ember.speed;
+        ember.x += ember.drift;
+
+        // Re-spawn bottom if went off bounds top
+        if (ember.y < -10) {
+          ember.y = canvas.height + 20;
+          ember.x = Math.random() * canvas.width;
+        }
+
+        // Draw ambient glowing ember bulb
+        ctx.beginPath();
+        ctx.arc(ember.x, ember.y, ember.r, 0, Math.PI * 2);
+
+        // Outer glow gradient
+        const glow = ctx.createRadialGradient(ember.x, ember.y, 0, ember.x, ember.y, ember.r * 3.5);
+        glow.addColorStop(0, `rgba(255, 170, 0, ${ember.alpha})`);
+        glow.addColorStop(0.5, `rgba(255, 45, 122, ${ember.alpha * 0.4})`);
+        glow.addColorStop(1, 'rgba(255, 45, 122, 0)');
+
+        ctx.fillStyle = glow;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateParallaxCanvas);
+    }
+
+    function spawnBackgroundStars() {
+      const starField = document.getElementById('star-field');
+      const count = 75;
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = "absolute star-twinkle bg-white rounded-full pointer-events-none";
+
+        const size = Math.random() * 2.5 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+
+        star.style.left = Math.random() * 100 + "%";
+        star.style.top = Math.random() * 100 + "%";
+
+        // random animation delay offset
+        star.style.animationDelay = (Math.random() * 5) + "s";
+        // random color tone (white, warm yellow, soft pink, starry cyan)
+        const colors = ['#fff', '#fff', '#ffea00', '#00e5ff', '#ff2d7a'];
+        star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+        starField.appendChild(star);
+      }
+    }
+
+    // ==========================================
+    //           MUSIC TOGGLE CONTROLS
+    // ==========================================
+    function toggleMusic() {
+      const btn = document.getElementById('toggle-music-btn');
+      const text = document.getElementById('music-btn-text');
+      const eq = document.getElementById('playing-status');
+      const dashboard = document.getElementById('retro-audio-dashboard');
+      const vinylRef = document.getElementById('audio-vinyl');
+      const statusLabel = document.getElementById('audio-status-label');
+      const panelPlayIcon = document.getElementById('panel-play-icon');
+
+      initAudio();
+
+      if (isMusicPlaying) {
+        // Pause music synth
+        stopSynthMusic();
+        text.textContent = "Start Music";
+        btn.className = "flex items-center justify-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-800 to-pink-700 hover:from-purple-700 hover:to-pink-600 border border-white/10 shadow-lg text-sm font-medium transition active:scale-95";
+        eq.classList.add('hidden');
+
+        // dashboard sync
+        statusLabel.textContent = "Music is Paused";
+        statusLabel.className = "text-[10px] text-gray-500 font-mono";
+        vinylRef.style.animationPlayState = 'paused';
+        panelPlayIcon.className = "fa-solid fa-play";
+      } else {
+        // Play music chimes
+        isMusicPlaying = true;
+        scheduleSongLoop();
+
+        text.textContent = "Pause Music";
+        btn.className = "flex items-center justify-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 border border-white/10 shadow-lg text-sm font-medium transition active:scale-95 text-white animate-pulse";
+        eq.classList.remove('hidden');
+
+        // reveal dashboard panel elegantly
+        dashboard.classList.remove('translate-y-24', 'opacity-0', 'scale-95');
+
+        // dashboard sync
+        statusLabel.textContent = "Chimes are Active";
+        statusLabel.className = "text-[10px] text-partyCyan font-mono animate-pulse";
+        vinylRef.style.animationPlayState = 'running';
+        panelPlayIcon.className = "fa-solid fa-pause";
+      }
+    }
+
+    function changeVolume(value) {
+      if (!synthGainNode) return;
+      // map scale 0-100 to 0.0-0.5 gain comfortably
+      const parsed = (value / 100) * 0.5;
+      synthGainNode.gain.setValueAtTime(parsed, audioCtx.currentTime);
+    }
+
+    function closeAudioDashboard() {
+      const dashboard = document.getElementById('retro-audio-dashboard');
+      dashboard.classList.add('translate-y-24', 'opacity-0', 'scale-95');
+    }
+
+    // ==========================================
+    //           DOWNLOAD CARD SCREENSHOTS
+    // ==========================================
+    function downloadWishCard() {
+      const card = document.getElementById('wish-card-downloadable');
+
+      // Fire mini celebration when downloading
+      triggerConfetti(0.5);
+
+      // Turn on high DPI screenshot captures via html2canvas (scale 2 provides gorgeous clean images on all screens!)
+      html2canvas(card, {
+        scale: 2.5,
+        backgroundColor: '#110121', // guarantee background consistency
+        useCORS: true,
+        logging: false
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `Birthday-Wish-${CELEBRANT_NAME}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }).catch(err => {
+        console.error("Card capture failed: ", err);
+      });
+    }
+
+    // ==========================================
+    //       SETTINGS LIVE CUSTOMIZER DRAWER
+    // ==========================================
+    let isCustomizerOpen = false;
+
+    function toggleCustomizer() {
+      const drawer = document.getElementById('settings-drawer');
+      if (isCustomizerOpen) {
+        drawer.classList.add('translate-x-full');
+        isCustomizerOpen = false;
+      } else {
+        drawer.classList.remove('translate-x-full');
+        isCustomizerOpen = true;
+      }
+    }
+
+    function resetSettingsToDefaultValues() {
+      document.getElementById('input-slogan').value = CELEBRANT_SUBNOTE;
+      document.getElementById('custom-message-input').value = EMOTIONAL_PRESETS[0];
+      document.getElementById('select-theme').value = "violet";
+    }
+
+    function resetSettingsToDefault() {
+      resetSettingsToDefaultValues();
+      updateLiveConfig();
+      changeThemeAtmosphere('violet');
+      setCardPolaroidPicture(1);
+      triggerConfetti(0.4);
+    }
+
+    function updateLiveConfig() {
+      CELEBRANT_NAME = document.getElementById('input-name').value.trim() || "Charlotte";
+
+      const ageVal = parseInt(document.getElementById('input-age').value);
+      CELEBRANT_AGE = (isNaN(ageVal) || ageVal <= 0) ? null : ageVal;
+
+      CELEBRANT_SUBNOTE = document.getElementById('input-slogan').value.trim() || "";
+
+      applyCurrentStateToUI();
+    }
+
+    function setCardPolaroidPicture(type) {
+      const polaroidImgOnCard = document.getElementById('card-polaroid-image');
+      const captionRef = document.getElementById('card-polaroid-caption');
+
+      if (type === 1) {
+        polaroidImgOnCard.src = "./src/assets/images/birthday_cake_1781040912610.png";
+        captionRef.textContent = SCRAPBOOK_CAPTIONS[0];
+      } else if (type === 2) {
+        polaroidImgOnCard.src = "./src/assets/images/memory_festive_1781040935416.png";
+        captionRef.textContent = SCRAPBOOK_CAPTIONS[1];
+      } else if (type === 3) {
+        polaroidImgOnCard.src = "./src/assets/images/memory_lanterns_1781040957522.png";
+        captionRef.textContent = SCRAPBOOK_CAPTIONS[2];
+      }
+
+      triggerConfetti(0.15);
+    }
+
+    function changeThemeAtmosphere(theme) {
+      const body = document.body;
+      // Clear old classes & write brand new color theme accents
+
+      if (theme === 'violet') {
+        // Magical violet classic dark theme
+        body.style.background = '#080211';
+        tailwind.config.theme.extend.colors.partyDark = '#080211';
+        tailwind.config.theme.extend.colors.partyDeep = '#130722';
+        tailwind.config.theme.extend.colors.partyViolet = '#aa00ff';
+        tailwind.config.theme.extend.colors.partyPink = '#ff2d7a';
+        tailwind.config.theme.extend.colors.partyCyan = '#00e5ff';
+      } else if (theme === 'sakura') {
+        // Blush Sakura floral warm theme
+        body.style.background = '#0e0409';
+        tailwind.config.theme.extend.colors.partyDark = '#0e0409';
+        tailwind.config.theme.extend.colors.partyDeep = '#200714';
+        tailwind.config.theme.extend.colors.partyViolet = '#d946ef';
+        tailwind.config.theme.extend.colors.partyPink = '#f43f5e';
+        tailwind.config.theme.extend.colors.partyCyan = '#fda4af';
+      } else if (theme === 'gold') {
+        // Golden Amber warm royal theme
+        body.style.background = '#0b0601';
+        tailwind.config.theme.extend.colors.partyDark = '#0b0601';
+        tailwind.config.theme.extend.colors.partyDeep = '#1a0e02';
+        tailwind.config.theme.extend.colors.partyViolet = '#f59e0b';
+        tailwind.config.theme.extend.colors.partyPink = '#ca8a04';
+        tailwind.config.theme.extend.colors.partyCyan = '#fef08a';
+      } else if (theme === 'cyber') {
+        // Cosmic Cyber tech theme
+        body.style.background = '#020b12';
+        tailwind.config.theme.extend.colors.partyDark = '#020b12';
+        tailwind.config.theme.extend.colors.partyDeep = '#041727';
+        tailwind.config.theme.extend.colors.partyViolet = '#3b82f6';
+        tailwind.config.theme.extend.colors.partyPink = '#06b6d4';
+        tailwind.config.theme.extend.colors.partyCyan = '#a5f3fc';
+      }
+
+      applyCurrentStateToUI();
+      triggerConfetti(0.35);
+    }
+
+    // ==========================================
+    //           SOCIAL COMMUNICATIONS
+    // ==========================================
+    function shareLink(channel) {
+      const shareMsg = `Check out this beautiful interactive birthday wish website created for Charlotte! ✨🍰🎉🎈`;
+      const encodedMsg = encodeURIComponent(shareMsg);
+      const encodedUrl = encodeURIComponent(window.location.href);
+
+      let path = '';
+      if (channel === 'whatsapp') {
+        path = `https://api.whatsapp.com/send?text=${encodedMsg}%20${encodedUrl}`;
+      } else if (channel === 'twitter') {
+        path = `https://twitter.com/intent/tweet?text=${encodedMsg}&url=${encodedUrl}`;
+      } else if (channel === 'facebook') {
+        path = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+      }
+
+      if (path) {
+        window.open(path, '_blank', 'noopener,noreferrer');
+      }
+    }
+  </script>
+</body>
+
+</html>
